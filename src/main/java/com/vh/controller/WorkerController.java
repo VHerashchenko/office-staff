@@ -11,6 +11,7 @@ public class WorkerController {
     ConnectionProperties connectionProperties = new ConnectionProperties();
     DataAccessObject workerDAO = new WorkerDAO(connectionProperties.getUrl(), connectionProperties.getUser(), connectionProperties.getPassword());
     DataAccessObject managerDAO = new ManagerDAO(connectionProperties.getUrl(), connectionProperties.getUser(), connectionProperties.getPassword());
+    DataAccessObject otherStaffDAO = new ManagerDAO(connectionProperties.getUrl(), connectionProperties.getUser(), connectionProperties.getPassword());
 
     public void processUser(){
         try {
@@ -21,6 +22,12 @@ public class WorkerController {
 
         try {
             managerDAO.findAll().forEach(x -> System.out.println(x.getId() + " " + x.getName() + " " + x.getRole()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            otherStaffDAO.findAll().forEach(x -> System.out.println(x.getId() + " " + x.getName() + " " + x.getRole()));
         } catch (SQLException e) {
             e.printStackTrace();
         }

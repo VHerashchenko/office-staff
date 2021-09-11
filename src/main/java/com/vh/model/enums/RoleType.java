@@ -6,5 +6,5 @@ import lombok.Getter;
 public enum RoleType {
     MANAGER,
     WORKER,
-    DIRECTOR
+    OTHER
 }
