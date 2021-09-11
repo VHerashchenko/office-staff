@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Director extends Worker {
+public class OtherStaff extends Worker {
     private String description;
 }
