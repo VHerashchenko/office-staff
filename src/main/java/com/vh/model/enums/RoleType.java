@@ -1,4 +1,4 @@
-package com.vh.model.entity;
+package com.vh.model.enums;
 
 import lombok.Getter;
 

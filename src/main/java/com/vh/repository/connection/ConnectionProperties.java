@@ -1,4 +1,4 @@
-package com.vh.model.connection;
+package com.vh.repository.connection;
 
 import lombok.Getter;
 
