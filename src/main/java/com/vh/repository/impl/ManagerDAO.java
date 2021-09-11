@@ -72,6 +72,10 @@ public class ManagerDAO extends WorkerDAO {
 
     @Override
     public void deleteById(Integer id) throws SQLException {
+        Manager manager = new Manager();
+        manager.setId(id);
+
+        deleteManagerFromAllWorker(manager);
         super.deleteById(id);
     }
 
