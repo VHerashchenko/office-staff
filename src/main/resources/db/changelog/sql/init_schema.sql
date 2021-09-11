@@ -1,3 +1,7 @@
+DROP TABLE vh_worker;
+DROP TYPE vh_role;
+DROP TYPE vh_department;
+
 CREATE TYPE vh_role AS ENUM ('MANAGER', 'WORKER', 'OTHER');
 CREATE TYPE vh_department AS ENUM ('ACCOUNTING', 'COMMERCIAL', 'MANAGERIAL');
 
