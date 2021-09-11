@@ -2,6 +2,7 @@ package com.vh.repository.impl;
 
 import com.vh.model.Manager;
 import com.vh.model.Worker;
+import com.vh.model.enums.DepartmentType;
 import com.vh.model.enums.RoleType;
 
 import java.sql.PreparedStatement;
@@ -41,7 +42,8 @@ public class ManagerDAO extends WorkerDAO {
                             resultSet.getDate("birthday"),
                             resultSet.getDate("start_date"),
                             resultSet.getInt("salary"),
-                            RoleType.valueOf(resultSet.getString("role"))));
+                            RoleType.valueOf(resultSet.getString("role")),
+                            DepartmentType.valueOf(resultSet.getString("department"))));
         }
 
         manager.setSubordinateEmployee(subordinateEmployee);
@@ -91,7 +93,8 @@ public class ManagerDAO extends WorkerDAO {
                                 resultSet.getDate("birthday"),
                                 resultSet.getDate("start_date"),
                                 resultSet.getInt("salary"),
-                                RoleType.valueOf(resultSet.getString("role"))));
+                                RoleType.valueOf(resultSet.getString("role")),
+                                DepartmentType.valueOf(resultSet.getString("department"))));
         }
 
         for (Manager manager : managers){
@@ -120,7 +123,8 @@ public class ManagerDAO extends WorkerDAO {
                             resultSet.getDate("birthday"),
                             resultSet.getDate("start_date"),
                             resultSet.getInt("salary"),
-                            RoleType.valueOf(resultSet.getString("role"))));
+                            RoleType.valueOf(resultSet.getString("role")),
+                            DepartmentType.valueOf(resultSet.getString("department"))));
         }
     }
 

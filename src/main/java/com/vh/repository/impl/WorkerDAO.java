@@ -1,5 +1,6 @@
 package com.vh.repository.impl;
 
+import com.vh.model.enums.DepartmentType;
 import com.vh.model.enums.RoleType;
 import com.vh.model.Worker;
 import com.vh.repository.DataAccessObject;
@@ -37,6 +38,7 @@ public class WorkerDAO implements DataAccessObject {
             worker.setStartDate(resultSet.getDate("start_date"));
             worker.setSalary(resultSet.getInt("salary"));
             worker.setRole(RoleType.valueOf(resultSet.getString("role")));
+            worker.setDepartment(DepartmentType.valueOf(resultSet.getString("department")));
         }
         return worker;
     }
@@ -46,13 +48,14 @@ public class WorkerDAO implements DataAccessObject {
         ResultSet resultSet;
         PreparedStatement myStmt;
 
-        myStmt = myConn.prepareStatement("INSERT INTO vh_worker (name, birthday, start_date, salary, role)" +
-                "VALUES (? ,? ,? ,? ,? ) RETURNING id;");
+        myStmt = myConn.prepareStatement("INSERT INTO vh_worker (name, birthday, start_date, salary, role, department)" +
+                "VALUES (? ,? ,? ,? ,?, ?) RETURNING id;");
         myStmt.setString(1, worker.getName());
         myStmt.setDate(2, (Date) worker.getBirthday());
         myStmt.setDate(3, (Date) worker.getStartDate());
         myStmt.setLong(4, worker.getSalary());
         myStmt.setObject(5, worker.getRole(), Types.OTHER);
+        myStmt.setObject(6, worker.getDepartment(), Types.OTHER);
 
         resultSet = myStmt.executeQuery();
 
@@ -72,14 +75,16 @@ public class WorkerDAO implements DataAccessObject {
                 "birthday = ?, " +
                 "start_date = ?, " +
                 "salary = ?, " +
-                "role = ? " +
+                "role = ?, " +
+                "department = ? " +
                 "WHERE id = ?");
         myStmt.setString(1, worker.getName());
         myStmt.setDate(2, (Date) worker.getBirthday());
         myStmt.setDate(3, (Date) worker.getStartDate());
         myStmt.setLong(4, worker.getSalary());
         myStmt.setObject(5, worker.getRole(), Types.OTHER);
-        myStmt.setLong(6, worker.getId());
+        myStmt.setObject(6, worker.getDepartment(), Types.OTHER);
+        myStmt.setLong(7, worker.getId());
 
         myStmt.execute();
 
@@ -116,7 +121,8 @@ public class WorkerDAO implements DataAccessObject {
                             resultSet.getDate("birthday"),
                             resultSet.getDate("start_date"),
                             resultSet.getInt("salary"),
-                            RoleType.valueOf(resultSet.getString("role"))));
+                            RoleType.valueOf(resultSet.getString("role")),
+                            DepartmentType.valueOf(resultSet.getString("department"))));
         }
         return workers;
     }
