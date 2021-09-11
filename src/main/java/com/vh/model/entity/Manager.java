@@ -8,5 +8,5 @@ import java.util.List;
 @Setter
 @Getter
 public class Manager extends Worker {
-    List<Worker> subordinateEmployee;
+    private List<Worker> subordinateEmployee;
 }

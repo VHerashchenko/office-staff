@@ -6,5 +6,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Director extends Worker {
-    String description;
+    private String description;
 }
