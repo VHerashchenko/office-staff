@@ -137,7 +137,7 @@ public class ManagerDAO extends WorkerDAO {
 
         myStmt = myConn.prepareStatement("UPDATE vh_worker SET\n" +
                     "manager_id = null\n" +
-                    "WHERE id = ?");
+                    "WHERE manager_id = ?");
         myStmt.setLong(1, manager.getId());
 
         myStmt.execute();

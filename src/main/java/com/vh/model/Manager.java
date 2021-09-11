@@ -28,7 +28,7 @@ public class Manager extends Worker {
         subordinateEmployee.add(worker);
     }
 
-    public void removeSubordinateEmployee(Worker worker){
+    public void removeSubordinateEmployee(int worker){
         if(subordinateEmployee != null)
             subordinateEmployee.remove(worker);
     }
