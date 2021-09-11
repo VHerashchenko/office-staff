@@ -50,12 +50,7 @@ public class WorkerDAO implements DataAccessObject {
 
         myStmt = myConn.prepareStatement("INSERT INTO vh_worker (name, birthday, start_date, salary, role, department)" +
                 "VALUES (? ,? ,? ,? ,?, ?) RETURNING id;");
-        myStmt.setString(1, worker.getName());
-        myStmt.setDate(2, (Date) worker.getBirthday());
-        myStmt.setDate(3, (Date) worker.getStartDate());
-        myStmt.setLong(4, worker.getSalary());
-        myStmt.setObject(5, worker.getRole(), Types.OTHER);
-        myStmt.setObject(6, worker.getDepartment(), Types.OTHER);
+        setAllProp(myStmt, worker);
 
         resultSet = myStmt.executeQuery();
 
@@ -78,13 +73,7 @@ public class WorkerDAO implements DataAccessObject {
                 "role = ?, " +
                 "department = ? " +
                 "WHERE id = ?");
-        myStmt.setString(1, worker.getName());
-        myStmt.setDate(2, (Date) worker.getBirthday());
-        myStmt.setDate(3, (Date) worker.getStartDate());
-        myStmt.setLong(4, worker.getSalary());
-        myStmt.setObject(5, worker.getRole(), Types.OTHER);
-        myStmt.setObject(6, worker.getDepartment(), Types.OTHER);
-        myStmt.setLong(7, worker.getId());
+        setAllProp(myStmt, worker);
 
         myStmt.execute();
 
@@ -125,6 +114,16 @@ public class WorkerDAO implements DataAccessObject {
                             DepartmentType.valueOf(resultSet.getString("department"))));
         }
         return workers;
+    }
+
+    private void setAllProp(PreparedStatement myStmt, Worker worker) throws SQLException {
+        myStmt.setString(1, worker.getName());
+        myStmt.setDate(2, (Date) worker.getBirthday());
+        myStmt.setDate(3, (Date) worker.getStartDate());
+        myStmt.setLong(4, worker.getSalary());
+        myStmt.setObject(5, worker.getRole(), Types.OTHER);
+        myStmt.setObject(6, worker.getDepartment(), Types.OTHER);
+        myStmt.setLong(7, worker.getId());
     }
 
     private void openConnection(String jdbc, String user, String password) {
