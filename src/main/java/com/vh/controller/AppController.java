@@ -24,7 +24,7 @@ public class AppController {
         departmentBudgetAccounting.setDepartmentType(DepartmentType.ACCOUNTING);
 
 //        calculateSalary = new CalculateSalaryWithSameHalves();
-        calculateSalary = new CalculatedSalaryWithPercentHalf();
+        calculateSalary = new CalculatedSalaryWithPercentHalves();
 
         List<Worker> workers = workerService.findAll();
         List<Worker> managers = managerService.findAll();

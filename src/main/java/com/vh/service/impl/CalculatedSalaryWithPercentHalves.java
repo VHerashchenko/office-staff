@@ -4,7 +4,7 @@ import com.vh.model.Report;
 
 import java.util.List;
 
-public class CalculatedSalaryWithPercentHalf extends CalculateSalary {
+public class CalculatedSalaryWithPercentHalves extends CalculateSalary {
 
     @Override
     protected List<Report> calculateHalves(List<Report> reports, Integer budget) {
