@@ -1,7 +1,6 @@
 package com.vh.repository;
 
 import com.vh.model.Worker;
-import com.vh.model.enums.RoleType;
 
 import java.sql.SQLException;
 import java.util.List;
