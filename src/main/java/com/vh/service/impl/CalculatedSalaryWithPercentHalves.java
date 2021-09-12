@@ -9,8 +9,8 @@ public class CalculatedSalaryWithPercentHalves extends CalculateSalary {
     @Override
     protected List<Report> calculateHalves(List<Report> reports, Integer budget) {
         Integer allMoneyInProgress = 0;
-        Integer halfForEach = 0;
-        Integer percent;
+        int halfForEach;
+        int percent;
 
         for (Report report : reports){
             allMoneyInProgress = report.getDefaultSalary() + report.getPrize();

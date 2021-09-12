@@ -20,11 +20,20 @@ public class AppController {
     CalculateSalaryService calculateSalary;
 
     public void processUser(){
+        //multiply with coefficient to autoSet departmentBudget. It is sum of default salary all department's workers ( * coefficient)
+        double coefficient = 1.2;
+
         DepartmentBudget departmentBudgetAccounting = new DepartmentBudget();
         departmentBudgetAccounting.setDepartmentType(DepartmentType.ACCOUNTING);
 
-//        calculateSalary = new CalculateSalaryWithSameHalves();
-        calculateSalary = new CalculatedSalaryWithPercentHalves();
+        DepartmentBudget departmentBudgetCommercial = new DepartmentBudget();
+        departmentBudgetCommercial.setDepartmentType(DepartmentType.COMMERCIAL);
+
+        DepartmentBudget departmentBudgetManagerial = new DepartmentBudget();
+        departmentBudgetManagerial.setDepartmentType(DepartmentType.MANAGERIAL);
+
+        calculateSalary = new CalculateSalaryWithSameHalves(); //same halves
+//        calculateSalary = new CalculatedSalaryWithPercentHalves(); //percent halves
 
         List<Worker> workers = workerService.findAll();
         List<Worker> managers = managerService.findAll();
@@ -37,7 +46,13 @@ public class AppController {
                 .flatMap(i -> i)
                 .collect(Collectors.toList());
 
-        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetAccounting, 1.2);
+        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetAccounting, coefficient);
         calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetAccounting).forEach(System.out::println);
+
+        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetCommercial, coefficient);
+        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetCommercial).forEach(System.out::println);
+
+        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetManagerial, coefficient);
+        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetManagerial).forEach(System.out::println);
     }
 }

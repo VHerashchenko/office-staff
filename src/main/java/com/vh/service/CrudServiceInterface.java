@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface CrudServiceInterface {
 
-    void create(Worker worker);
+    Worker create(Worker worker);
 
-    void update(Worker worker);
+    Worker update(Worker worker);
 
     void delete(Worker worker);
 

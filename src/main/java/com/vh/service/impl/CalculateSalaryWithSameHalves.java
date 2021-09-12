@@ -8,8 +8,8 @@ public class CalculateSalaryWithSameHalves extends CalculateSalary{
 
     @Override
     protected List<Report> calculateHalves(List<Report> reports, Integer budget) {
-        Integer allMoneyInProgress = 0;
-        Integer halfForEach;
+        int allMoneyInProgress = 0;
+        int halfForEach;
 
         for (Report report : reports){
             allMoneyInProgress = report.getDefaultSalary() + report.getPrize();

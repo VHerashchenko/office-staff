@@ -21,21 +21,23 @@ public class ManagerService implements CrudServiceInterface {
     }
 
     @Override
-    public void create(Worker worker){
+    public Worker create(Worker worker){
         try {
             worker = managerDAO.create(worker);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return worker;
     }
 
     @Override
-    public void update(Worker worker){
+    public Worker update(Worker worker){
         try {
             worker = managerDAO.update(worker);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return worker;
     }
 
     @Override

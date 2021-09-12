@@ -21,21 +21,23 @@ public class OtherStaffService implements CrudServiceInterface {
     }
 
     @Override
-    public void create(Worker worker){
+    public Worker create(Worker worker){
         try {
             worker = otherStaffDAO.create(worker);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return worker;
     }
 
     @Override
-    public void update(Worker otherStaff){
+    public Worker update(Worker worker){
         try {
-            otherStaff = otherStaffDAO.update(otherStaff);
+            worker = otherStaffDAO.update(worker);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return worker;
     }
 
     @Override
@@ -49,23 +51,23 @@ public class OtherStaffService implements CrudServiceInterface {
 
     @Override
     public Worker getById(Integer id){
-        Worker otherStaff = new Worker();
+        Worker worker = new Worker();
         try {
-            otherStaff = otherStaffDAO.getById(id);
+            worker = otherStaffDAO.getById(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return otherStaff;
+        return worker;
     }
 
     @Override
     public List<Worker> findAll(){
-        List<Worker> otherStaff = new ArrayList<>();
+        List<Worker> workers = new ArrayList<>();
         try {
-            otherStaff = otherStaffDAO.findAll();
+            workers = otherStaffDAO.findAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return otherStaff;
+        return workers;
     }
 }

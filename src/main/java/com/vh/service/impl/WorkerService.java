@@ -21,21 +21,23 @@ public class WorkerService implements CrudServiceInterface {
     }
 
     @Override
-    public void create(Worker worker){
+    public Worker create(Worker worker){
         try {
             worker = workerDAO.create(worker);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return worker;
     }
 
     @Override
-    public void update(Worker worker){
+    public Worker update(Worker worker){
         try {
             worker = workerDAO.update(worker);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return worker;
     }
 
     @Override

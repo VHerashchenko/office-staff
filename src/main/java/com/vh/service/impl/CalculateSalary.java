@@ -32,7 +32,7 @@ public abstract class CalculateSalary implements CalculateSalaryService {
     @Override
     public List<Report> calculateSalaryByDepartment(List<Worker> workers, DepartmentBudget department) {
         List<Report> outputList = new ArrayList<>();
-        Integer amountOfSubordinates = 0;
+        int amountOfSubordinates = 0;
 
         for (Worker worker: workers){
             if (worker.getDepartment().equals(department.getDepartmentType())){
