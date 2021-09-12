@@ -1,4 +1,3 @@
---working only with empty database
 INSERT INTO  vh_worker (name, birthday, start_date, salary, role, department)
 VALUES ('Yarick Zema', '29-06-1999', '12-03-2017', 4500000, 'MANAGER', 'ACCOUNTING');
 

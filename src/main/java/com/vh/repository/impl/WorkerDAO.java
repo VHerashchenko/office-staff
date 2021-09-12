@@ -71,7 +71,9 @@ public class WorkerDAO implements DataAccessObject {
                 "start_date = ?, " +
                 "salary = ?, " +
                 "role = ?, " +
-                "department = ? " +
+                "department = ?, " +
+                "manager_id = null, " +
+                "description = null " +
                 "WHERE id = ?");
         setAllProp(myStmt, worker);
 

@@ -50,7 +50,7 @@ public class OtherStaffDAO extends WorkerDAO{
 
     @Override
     public OtherStaff update(Worker worker) throws SQLException {
-        OtherStaff otherStaff = (OtherStaff) super.create(worker);
+        OtherStaff otherStaff = (OtherStaff) super.update(worker);
 
         setDepartment(otherStaff);
 
