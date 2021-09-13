@@ -9,6 +9,5 @@ public class App {
     public static void main( String[] args ) {
         AppController appController = new AppController();
         appController.processUser();
-        System.out.println(Instant.now());
     }
 }

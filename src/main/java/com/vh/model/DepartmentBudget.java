@@ -12,5 +12,5 @@ import lombok.Setter;
 @Setter
 public class DepartmentBudget {
     private DepartmentType departmentType;
-    private Integer money;
+    private Long money;
 }

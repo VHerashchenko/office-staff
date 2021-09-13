@@ -36,7 +36,7 @@ public class WorkerDAO implements DataAccessObject {
             worker.setName(resultSet.getString("name"));
             worker.setBirthday(resultSet.getDate("birthday"));
             worker.setStartDate(resultSet.getDate("start_date"));
-            worker.setSalary(resultSet.getInt("salary"));
+            worker.setSalary(resultSet.getLong("salary"));
             worker.setRole(RoleType.valueOf(resultSet.getString("role")));
             worker.setDepartment(DepartmentType.valueOf(resultSet.getString("department")));
         }
@@ -111,7 +111,7 @@ public class WorkerDAO implements DataAccessObject {
                             resultSet.getString("name"),
                             resultSet.getDate("birthday"),
                             resultSet.getDate("start_date"),
-                            resultSet.getInt("salary"),
+                            resultSet.getLong("salary"),
                             RoleType.valueOf(resultSet.getString("role")),
                             DepartmentType.valueOf(resultSet.getString("department"))));
         }

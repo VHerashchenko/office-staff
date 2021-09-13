@@ -7,10 +7,10 @@ import java.util.List;
 public class CalculatedSalaryWithPercentHalves extends CalculateSalary {
 
     @Override
-    protected List<Report> calculateHalves(List<Report> reports, Integer budget) {
-        Integer allMoneyInProgress = 0;
-        int halfForEach;
-        int percent;
+    protected List<Report> calculateHalves(List<Report> reports, Long budget) {
+        long allMoneyInProgress = 0;
+        long halfForEach;
+        long percent;
 
         for (Report report : reports){
             allMoneyInProgress = report.getDefaultSalary() + report.getPrize();

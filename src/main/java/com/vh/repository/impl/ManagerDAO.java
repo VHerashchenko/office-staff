@@ -41,7 +41,7 @@ public class ManagerDAO extends WorkerDAO {
                             resultSet.getString("name"),
                             resultSet.getDate("birthday"),
                             resultSet.getDate("start_date"),
-                            resultSet.getInt("salary"),
+                            resultSet.getLong("salary"),
                             RoleType.valueOf(resultSet.getString("role")),
                             DepartmentType.valueOf(resultSet.getString("department"))));
         }
@@ -96,7 +96,7 @@ public class ManagerDAO extends WorkerDAO {
                                 resultSet.getString("name"),
                                 resultSet.getDate("birthday"),
                                 resultSet.getDate("start_date"),
-                                resultSet.getInt("salary"),
+                                resultSet.getLong("salary"),
                                 RoleType.valueOf(resultSet.getString("role")),
                                 DepartmentType.valueOf(resultSet.getString("department"))));
         }
@@ -126,7 +126,7 @@ public class ManagerDAO extends WorkerDAO {
                             resultSet.getString("name"),
                             resultSet.getDate("birthday"),
                             resultSet.getDate("start_date"),
-                            resultSet.getInt("salary"),
+                            resultSet.getLong("salary"),
                             RoleType.valueOf(resultSet.getString("role")),
                             DepartmentType.valueOf(resultSet.getString("department"))));
         }

@@ -7,9 +7,9 @@ import java.util.List;
 public class CalculateSalaryWithSameHalves extends CalculateSalary{
 
     @Override
-    protected List<Report> calculateHalves(List<Report> reports, Integer budget) {
-        int allMoneyInProgress = 0;
-        int halfForEach;
+    protected List<Report> calculateHalves(List<Report> reports, Long budget) {
+        long allMoneyInProgress = 0;
+        long halfForEach;
 
         for (Report report : reports){
             allMoneyInProgress = report.getDefaultSalary() + report.getPrize();

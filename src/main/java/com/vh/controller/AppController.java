@@ -39,49 +39,103 @@ public class AppController {
         calculateSalary = new CalculateSalaryWithSameHalves(); //same halves
 //        calculateSalary = new CalculatedSalaryWithPercentHalves(); //percent halves
 
-        List<Worker> workers = workerService.findAll();
-        List<Worker> managers = managerService.findAll();
-        List<Worker> otherStaffs = otherStaffService.findAll();
+        List<Worker> workers = workerService.findAll(); //find all RoleType.WORKER
+        List<Worker> managers = managerService.findAll(); //find all RoleType.MANAGER
+        List<Worker> otherStaffs = otherStaffService.findAll(); //find all RoleType.OTHER
 
-//        List<Worker> allInOneList = Stream.of(
-//                        workers.stream(),
-//                        managers.stream(),
-//                        otherStaffs.stream())
-//                .flatMap(i -> i)
-//                .collect(Collectors.toList());
+        List<Worker> allInOneList = Stream.of(
+                        workers.stream(),
+                        managers.stream(),
+                        otherStaffs.stream())
+                .flatMap(i -> i)
+                .collect(Collectors.toList());
 
-//        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetAccounting, coefficient);
-//        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetAccounting).forEach(System.out::println);
-//
-//        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetCommercial, coefficient);
-//        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetCommercial).forEach(System.out::println);
-//
-//        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetManagerial, coefficient);
-//        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetManagerial).forEach(System.out::println);
+        System.out.println("======ACCOUNTING DEPARTMENT REPORTS======\n");
 
+        //calculate salary for Accounting department
+        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetAccounting, coefficient);
+        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetAccounting)
+                .forEach(System.out::println);
 
+        System.out.println("\n======COMMERCIAL DEPARTMENT REPORTS======\n");
 
-//        Worker worker = workerService.getById(workers.get(0).getId());
-//        Manager manager = (Manager) workerService.changeRole(worker, RoleType.MANAGER);
-//        workers.remove(0);
-//        manager.addSubordinateEmployee(workers.stream().findAny().get());
-//        manager = (Manager) managerService.update(manager);
+        //calculate salary for Commercial department
+        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetCommercial, coefficient);
+        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetCommercial)
+                .forEach(System.out::println);
 
-        Manager manager = (Manager) managerService.getById(1);
-//        manager.addSubordinateEmployee(workerService.getById(2));
-//        manager = (Manager) managerService.update(manager);
+        System.out.println("\n======MANAGERIAL DEPARTMENT REPORTS======\n");
 
+        //calculate salary for Managerial department + set default budget for every department
+        calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetManagerial, coefficient);
+        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetManagerial)
+                .forEach(System.out::println);
+
+        System.out.println("======ACCOUNTING DEPARTMENT REPORTS (PERCENT)======\n");
+
+        calculateSalary = new CalculatedSalaryWithPercentHalves();
+
+        //calculate salary for Accounting department
+        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetAccounting)
+                .forEach(System.out::println);
+
+        System.out.println("\n======COMMERCIAL DEPARTMENT REPORTS (PERCENT)======\n");
+
+        //calculate salary for Commercial department
+        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetCommercial)
+                .forEach(System.out::println);
+
+        System.out.println("\n======MANAGERIAL DEPARTMENT REPORTS (PERCENT)======\n");
+
+        //calculate salary for Managerial department
+        calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetManagerial)
+                .forEach(System.out::println);
+
+        System.out.println("\n======CHANGE ROLE WORKER WITH ID 2 TO MANAGER======\n");
+
+        //change role from worker to manager
+        Worker worker = workerService.getById(2);
+        Manager manager = (Manager) workerService.changeRole(worker, RoleType.MANAGER);
+        manager = (Manager) managerService.update(manager);
+
+        managerService.findAll()
+                .forEach(System.out::println);
+
+        System.out.println("\n======ADD SUBORDINATE WORKER TO NEW MANAGER======\n");
+
+        //add subordinate worker to new manager. This action reset worker with id 3 from his manager to new one
+        manager.addSubordinateEmployee(workerService.getById(3));
+        manager = (Manager) managerService.update(manager);
+
+        managerService.findAll()
+                .forEach(System.out::println);
+
+        System.out.println("\n======TRY TO CHANGE ROLE MANAGER WITH SUBORDINATES======\n");
+
+        //try to change role manager with subordinate workers (catch exception)
         try{
             OtherStaff otherStaff = (OtherStaff) managerService.changeRole(manager, RoleType.OTHER);
         } catch (ManagerStillHasSubordinateException e){
             System.out.println("Exception: manager has subordinate workers");
         }
-//
-//        otherStaff = (OtherStaff) otherStaffService.update(otherStaff);
-//
-//        Worker worker = otherStaffService.changeRole(otherStaff, RoleType.WORKER);
-//        worker = workerService.update(worker);
 
-//        System.out.println(worker.getName());
+        System.out.println("\n======REMOVE SUBORDINATE FROM MANAGER======\n");
+
+        //remove subordinate worker from manager
+        manager.removeSubordinateEmployeeByWorker(workerService.getById(3));
+        manager = (Manager) managerService.update(manager);
+
+        managerService.findAll()
+                .forEach(System.out::println);
+
+        System.out.println("\n======CHANGE ROLE MANAGER TO OTHER======\n");
+
+        //changing role from manager to other without subordinates
+        OtherStaff otherStaff = (OtherStaff) managerService.changeRole(manager, RoleType.OTHER);
+        //set description to new RoleType.OTHER worker. without it would be default description
+        otherStaff.setDescription("New Description");
+        otherStaff = (OtherStaff) otherStaffService.update(otherStaff);
+
+        System.out.println(otherStaff);
     }
 }

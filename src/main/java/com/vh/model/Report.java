@@ -21,13 +21,13 @@ public class Report {
     private DepartmentType departmentType;
     private RoleType roleType;
     private Integer amountOfSubordinate;
-    private Integer defaultSalary;
-    private Integer prize;
-    private Integer calculatedHalf;
-    private Integer sumAllPrizeSalary;
+    private Long defaultSalary;
+    private Long prize;
+    private Long calculatedHalf;
+    private Long sumAllPrizeSalary;
     private Date date;
 
-    public Report(String name, Date birthday, DepartmentType departmentType, RoleType roleType, Integer defaultSalary, Date date, Integer amountOfSubordinate){
+    public Report(String name, Date birthday, DepartmentType departmentType, RoleType roleType, Long defaultSalary, Date date, Integer amountOfSubordinate){
         this.name = name;
         this.birthday = birthday;
         this.departmentType = departmentType;
@@ -37,10 +37,10 @@ public class Report {
         this.date = date;
 
         if(birthday.getMonth() == date.getMonth()){
-            prize = (int) (defaultSalary * Report.DEFAULT_PRIZE_FOR_BIRTHDAY);
+            prize = (long) (defaultSalary * Report.DEFAULT_PRIZE_FOR_BIRTHDAY);
         }
         else {
-            prize = 0;
+            prize = 0L;
         }
     }
 

@@ -17,7 +17,7 @@ import java.util.List;
 public class Manager extends Worker {
     private List<Worker> subordinateEmployee;
 
-    public Manager (Integer id, String name, Date birthday, Date startDate, Integer salary, RoleType roleType, DepartmentType departmentType){
+    public Manager (Integer id, String name, Date birthday, Date startDate, Long salary, RoleType roleType, DepartmentType departmentType){
         super(id, name, birthday, startDate, salary, roleType, departmentType);
     }
 
@@ -44,5 +44,11 @@ public class Manager extends Worker {
                 subordinateEmployee.remove(index);
             }
         }
+    }
+
+    @Override
+    public String toString(){
+        return super.toString()
+                + "Amount of Subordinates = " + this.getSubordinateEmployee().size();
     }
 }

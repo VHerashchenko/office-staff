@@ -1,7 +1,6 @@
 package com.vh.service.impl;
 
 import com.vh.model.Manager;
-import com.vh.model.OtherStaff;
 import com.vh.model.Worker;
 import com.vh.model.enums.RoleType;
 import com.vh.repository.DataAccessObject;

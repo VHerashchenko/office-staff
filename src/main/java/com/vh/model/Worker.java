@@ -18,7 +18,14 @@ public class Worker {
     private String name;
     private Date birthday;
     private Date startDate;
-    private Integer salary;
+    private Long salary;
     private RoleType role;
     private DepartmentType department;
+
+    @Override
+    public String toString(){
+        return "Name: " + this.name + "\n"
+                + "Role: " + this.role + "\n";
+
+    }
 }

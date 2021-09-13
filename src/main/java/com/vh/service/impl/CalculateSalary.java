@@ -16,7 +16,7 @@ public abstract class CalculateSalary implements CalculateSalaryService {
 
     @Override
     public DepartmentBudget setDefaultSalaryForDepartment(List<Worker> workers, DepartmentBudget department, double coefficient) {
-        Integer defaultSalarySum = 0;
+        long defaultSalarySum = 0;
 
         for (Worker worker: workers){
             if (worker.getDepartment().equals(department.getDepartmentType())){
@@ -24,7 +24,7 @@ public abstract class CalculateSalary implements CalculateSalaryService {
             }
         }
 
-        department.setMoney( (int) (defaultSalarySum * coefficient));
+        department.setMoney( (long) (defaultSalarySum * coefficient));
 
         return department;
     }
@@ -70,5 +70,5 @@ public abstract class CalculateSalary implements CalculateSalaryService {
         return reports;
     }
 
-    protected abstract List<Report> calculateHalves(List<Report> reports, Integer budget);
+    protected abstract List<Report> calculateHalves(List<Report> reports, Long budget);
 }
