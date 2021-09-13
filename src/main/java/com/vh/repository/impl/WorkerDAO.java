@@ -76,6 +76,7 @@ public class WorkerDAO implements DataAccessObject {
                 "description = null " +
                 "WHERE id = ?");
         setAllProp(myStmt, worker);
+        myStmt.setLong(7, worker.getId());
 
         myStmt.execute();
 
@@ -120,12 +121,11 @@ public class WorkerDAO implements DataAccessObject {
 
     private void setAllProp(PreparedStatement myStmt, Worker worker) throws SQLException {
         myStmt.setString(1, worker.getName());
-        myStmt.setDate(2, (Date) worker.getBirthday());
-        myStmt.setDate(3, (Date) worker.getStartDate());
+        myStmt.setDate(2, new Date(worker.getBirthday().getTime()));
+        myStmt.setDate(3, new Date(worker.getStartDate().getTime()));
         myStmt.setLong(4, worker.getSalary());
         myStmt.setObject(5, worker.getRole(), Types.OTHER);
         myStmt.setObject(6, worker.getDepartment(), Types.OTHER);
-        myStmt.setLong(7, worker.getId());
     }
 
     private void openConnection(String jdbc, String user, String password) {

@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class CalculateSalary implements CalculateSalaryService {
 
     @Override
-    public DepartmentBudget setDefaultSalaryForDepartment(List<Worker> workers, DepartmentBudget department, double coefficient) {
+    public void setDefaultSalaryForDepartment(List<Worker> workers, DepartmentBudget department, double coefficient) {
         long defaultSalarySum = 0;
 
         for (Worker worker: workers){
@@ -25,8 +25,6 @@ public abstract class CalculateSalary implements CalculateSalaryService {
         }
 
         department.setMoney( (long) (defaultSalarySum * coefficient));
-
-        return department;
     }
 
     @Override
@@ -59,7 +57,7 @@ public abstract class CalculateSalary implements CalculateSalaryService {
 
         return outputList;
     }
-    private List<Report> calculatePrizeForManagersSubordinate(List<Report> reports){
+    private void calculatePrizeForManagersSubordinate(List<Report> reports){
         for (Report report : reports){
             if(report.getAmountOfSubordinate() != 0){
                 report.setPrize(report.getPrize()
@@ -67,8 +65,7 @@ public abstract class CalculateSalary implements CalculateSalaryService {
                                 * report.getAmountOfSubordinate());
             }
         }
-        return reports;
     }
 
-    protected abstract List<Report> calculateHalves(List<Report> reports, Long budget);
+    protected abstract void calculateHalves(List<Report> reports, Long budget);
 }

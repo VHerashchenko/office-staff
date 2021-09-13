@@ -7,7 +7,8 @@ import java.util.List;
 public class CalculateSalaryWithSameHalves extends CalculateSalary{
 
     @Override
-    protected List<Report> calculateHalves(List<Report> reports, Long budget) {
+    protected void calculateHalves(List<Report> reports, Long budget) {
+        if(reports == null || reports.size() == 0) return;
         long allMoneyInProgress = 0;
         long halfForEach;
 
@@ -21,6 +22,5 @@ public class CalculateSalaryWithSameHalves extends CalculateSalary{
             report.setCalculatedHalf(halfForEach);
             report.calculateSum();
         }
-        return reports;
     }
 }

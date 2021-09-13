@@ -3,12 +3,14 @@ package com.vh.model;
 import com.vh.model.enums.DepartmentType;
 import com.vh.model.enums.RoleType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class OtherStaff extends Worker {
     private String description = "default description";
 
@@ -21,6 +23,6 @@ public class OtherStaff extends Worker {
 
     public String toString(){
         return super.toString()
-                + "Description = " + this.description;
+                + "Description = " + this.description + "\n";
     }
 }

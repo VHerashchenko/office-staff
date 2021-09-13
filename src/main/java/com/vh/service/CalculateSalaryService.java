@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CalculateSalaryService {
 
-    DepartmentBudget setDefaultSalaryForDepartment(List<Worker> workers, DepartmentBudget department, double coefficient);
+    void setDefaultSalaryForDepartment(List<Worker> workers, DepartmentBudget department, double coefficient);
 
     List<Report> calculateSalaryByDepartment(List<Worker> workers, DepartmentBudget department);
 }

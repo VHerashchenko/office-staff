@@ -12,6 +12,8 @@ import com.vh.service.CalculateSalaryService;
 import com.vh.service.CrudServiceInterface;
 import com.vh.service.impl.*;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -137,5 +139,28 @@ public class AppController {
         otherStaff = (OtherStaff) otherStaffService.update(otherStaff);
 
         System.out.println(otherStaff);
+
+        System.out.println("\n======CREATE NEW MANAGER======\n");
+
+        manager = new Manager();
+        manager.setName("New Manager");
+        manager.setBirthday(Date.from(Instant.now()));
+        manager.setStartDate(Date.from(Instant.now()));
+        manager.setRole(RoleType.MANAGER);
+        manager.setSalary(2100000L);
+        manager.setDepartment(DepartmentType.COMMERCIAL);
+
+        manager = (Manager) managerService.create(manager);
+
+        managerService.findAll()
+                .forEach(System.out::println);
+
+        System.out.println("\n======DELETE MANAGER======\n");
+
+        managerService.delete(manager);
+
+        managerService.findAll()
+                .forEach(System.out::println);
+
     }
 }
