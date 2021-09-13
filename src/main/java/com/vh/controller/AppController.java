@@ -73,7 +73,7 @@ public class AppController {
 
         System.out.println("======ACCOUNTING DEPARTMENT REPORTS (PERCENT)======\n");
 
-        calculateSalary = new CalculatedSalaryWithPercentHalves(); //percent halves
+        calculateSalary = new CalculateSalaryWithPercentHalves(); //percent halves
 
         //calculate salary for Accounting department
         calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetAccounting)
