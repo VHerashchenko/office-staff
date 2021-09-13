@@ -1,6 +1,10 @@
 package com.vh.service.impl;
 
+import com.vh.exceptions.ManagerStillHasSubordinateException;
+import com.vh.model.Manager;
+import com.vh.model.OtherStaff;
 import com.vh.model.Worker;
+import com.vh.model.enums.RoleType;
 import com.vh.repository.DataAccessObject;
 import com.vh.repository.connection.ConnectionProperties;
 import com.vh.repository.impl.ManagerDAO;
@@ -51,13 +55,13 @@ public class ManagerService implements CrudServiceInterface {
 
     @Override
     public Worker getById(Integer id){
-        Worker worker = new Worker();
+        Manager manager = new Manager();
         try {
-            worker = managerDAO.getById(id);
+            manager = (Manager) managerDAO.getById(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return worker;
+        return manager;
     }
 
     @Override
@@ -69,5 +73,25 @@ public class ManagerService implements CrudServiceInterface {
             e.printStackTrace();
         }
         return workers;
+    }
+
+    @Override
+    public Worker changeRole(Worker worker, RoleType roleType) throws ManagerStillHasSubordinateException {
+        Manager manager = (Manager) worker;
+            if(manager.getSubordinateEmployee().size() > 0) throw new ManagerStillHasSubordinateException(manager);
+
+        if(roleType.equals(RoleType.WORKER)){
+            manager.setRole(RoleType.WORKER);
+            return new Worker(manager.getId(), manager.getName(), manager.getBirthday(),
+                    manager.getStartDate(), manager.getSalary(), manager.getRole(), manager.getDepartment());
+        }
+        else if(roleType.equals(RoleType.OTHER)){
+            manager.setRole(RoleType.OTHER);
+            return new OtherStaff(manager.getId(), manager.getName(), manager.getBirthday(),
+                    manager.getStartDate(), manager.getSalary(), manager.getRole(), manager.getDepartment(), null);
+        }
+        else{
+            return manager;
+        }
     }
 }

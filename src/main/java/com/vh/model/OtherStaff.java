@@ -10,10 +10,12 @@ import java.util.Date;
 @Setter
 @Getter
 public class OtherStaff extends Worker {
-    private String description;
+    private String description = "default description";
 
     public OtherStaff (Integer id, String name, Date birthday, Date startDate, Integer salary, RoleType roleType, DepartmentType departmentType, String description){
         super(id, name, birthday, startDate, salary, roleType, departmentType);
-        this.description = description;
+        if(description != null){
+            this.description = description;
+        }
     }
 }

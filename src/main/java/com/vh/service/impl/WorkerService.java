@@ -1,6 +1,9 @@
 package com.vh.service.impl;
 
+import com.vh.model.Manager;
+import com.vh.model.OtherStaff;
 import com.vh.model.Worker;
+import com.vh.model.enums.RoleType;
 import com.vh.repository.DataAccessObject;
 import com.vh.repository.connection.ConnectionProperties;
 import com.vh.repository.impl.WorkerDAO;
@@ -69,5 +72,22 @@ public class WorkerService implements CrudServiceInterface {
             e.printStackTrace();
         }
         return workers;
+    }
+
+    @Override
+    public Worker changeRole(Worker worker, RoleType roleType) {
+        if(roleType.equals(RoleType.MANAGER)){
+            worker.setRole(RoleType.MANAGER);
+            return new Manager(worker.getId(), worker.getName(), worker.getBirthday(),
+                        worker.getStartDate(), worker.getSalary(), worker.getRole(), worker.getDepartment());
+        }
+        else if(roleType.equals(RoleType.OTHER)){
+            worker.setRole(RoleType.OTHER);
+            return new OtherStaff(worker.getId(), worker.getName(), worker.getBirthday(),
+                    worker.getStartDate(), worker.getSalary(), worker.getRole(), worker.getDepartment(), null);
+        }
+        else{
+            return worker;
+        }
     }
 }

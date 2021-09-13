@@ -22,14 +22,14 @@ public class ManagerDAO extends WorkerDAO {
 
     @Override
     public Manager getById(Integer id) throws SQLException {
-        Manager manager = (Manager) super.getById(id);
+        Manager manager = new Manager(super.getById(id));
         List<Worker> subordinateEmployee = new ArrayList<>();
 
         ResultSet resultSet;
         PreparedStatement myStmt;
 
         myStmt = myConn.prepareStatement("SELECT * FROM vh_worker " +
-                "WHERE id = ?");
+                "WHERE manager_id = ?");
         myStmt.setLong(1, id);
 
         resultSet = myStmt.executeQuery();
@@ -144,6 +144,7 @@ public class ManagerDAO extends WorkerDAO {
     }
 
     private void addManagerToAllConnectedWorker(Manager manager) throws SQLException {
+        if(manager.getSubordinateEmployee() == null) return;
         PreparedStatement myStmt;
 
         for (Worker subEmp : manager.getSubordinateEmployee()){

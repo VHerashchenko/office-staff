@@ -21,6 +21,10 @@ public class Manager extends Worker {
         super(id, name, birthday, startDate, salary, roleType, departmentType);
     }
 
+    public Manager (Worker worker){
+        super(worker.getId(), worker.getName(), worker.getBirthday(), worker.getStartDate(), worker.getSalary(), worker.getRole(), worker.getDepartment());
+    }
+
     public void addSubordinateEmployee(Worker worker){
         if(subordinateEmployee == null)
             subordinateEmployee = new ArrayList<>();
@@ -28,8 +32,17 @@ public class Manager extends Worker {
         subordinateEmployee.add(worker);
     }
 
-    public void removeSubordinateEmployee(int worker){
-        if(subordinateEmployee != null)
-            subordinateEmployee.remove(worker);
+    public void removeSubordinateEmployeeByWorker(Worker worker){
+        if(subordinateEmployee != null) {
+            int index = -1;
+            for (int i = 0; i < subordinateEmployee.size(); ++i) {
+                if (subordinateEmployee.get(i).getId().equals(worker.getId())) {
+                    index = i;
+                }
+            }
+            if(index != -1){
+                subordinateEmployee.remove(index);
+            }
+        }
     }
 }
