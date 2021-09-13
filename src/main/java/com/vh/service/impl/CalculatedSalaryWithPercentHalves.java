@@ -13,7 +13,7 @@ public class CalculatedSalaryWithPercentHalves extends CalculateSalary {
         long percent;
 
         for (Report report : reports){
-            allMoneyInProgress = report.getDefaultSalary() + report.getPrize();
+            allMoneyInProgress = allMoneyInProgress + report.getDefaultSalary() + report.getPrize();
         }
 
         for (Report report : reports){

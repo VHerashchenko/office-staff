@@ -12,7 +12,7 @@ public class CalculateSalaryWithSameHalves extends CalculateSalary{
         long halfForEach;
 
         for (Report report : reports){
-            allMoneyInProgress = report.getDefaultSalary() + report.getPrize();
+            allMoneyInProgress = allMoneyInProgress + report.getDefaultSalary() + report.getPrize();
         }
 
         halfForEach = (budget - allMoneyInProgress) / reports.size();

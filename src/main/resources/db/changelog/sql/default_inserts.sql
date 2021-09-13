@@ -1,12 +1,12 @@
 INSERT INTO  vh_worker (name, birthday, start_date, salary, role, department)
-VALUES ('Yarick Zema', '29-06-1999', '12-03-2017', 4500000, 'MANAGER', 'ACCOUNTING');
+VALUES ('Yarick Zema', '29-06-1999', '12-03-2017', 3000000, 'MANAGER', 'ACCOUNTING');
 
 INSERT INTO vh_worker (name, birthday, start_date, salary, role, department, manager_id)
 VALUES ('Vadym Hera', '24-06-1999', '10-03-2020', 2000000, 'WORKER', 'ACCOUNTING',
         (SELECT id FROM vh_worker WHERE name = 'Yarick Zema'));
 
 INSERT INTO vh_worker (name, birthday, start_date, salary, role, department, description, manager_id)
-VALUES ('Petya Prada', '02-11-1998', '24-05-2017', 50000000, 'OTHER', 'ACCOUNTING', 'Other role for Petya',
+VALUES ('Petya Prada', '02-11-1998', '24-05-2017', 5000000, 'OTHER', 'ACCOUNTING', 'Other role for Petya',
         (SELECT id FROM vh_worker WHERE name = 'Yarick Zema'));
 
 INSERT INTO vh_worker (name, birthday, start_date, salary, role, department)

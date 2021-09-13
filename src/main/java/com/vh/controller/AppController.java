@@ -54,6 +54,7 @@ public class AppController {
 
         //calculate salary for Accounting department
         calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetAccounting, coefficient);
+        System.out.println(departmentBudgetAccounting.getMoney());
         calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetAccounting)
                 .forEach(System.out::println);
 
@@ -70,6 +71,7 @@ public class AppController {
         calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetManagerial, coefficient);
         calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetManagerial)
                 .forEach(System.out::println);
+
 
         System.out.println("======ACCOUNTING DEPARTMENT REPORTS (PERCENT)======\n");
 
