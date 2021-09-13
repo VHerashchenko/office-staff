@@ -37,7 +37,6 @@ public class AppController {
         departmentBudgetManagerial.setDepartmentType(DepartmentType.MANAGERIAL);
 
         calculateSalary = new CalculateSalaryWithSameHalves(); //same halves
-//        calculateSalary = new CalculatedSalaryWithPercentHalves(); //percent halves
 
         List<Worker> workers = workerService.findAll(); //find all RoleType.WORKER
         List<Worker> managers = managerService.findAll(); //find all RoleType.MANAGER
@@ -50,22 +49,21 @@ public class AppController {
                 .flatMap(i -> i)
                 .collect(Collectors.toList());
 
-        System.out.println("======ACCOUNTING DEPARTMENT REPORTS======\n");
+        System.out.println("======ACCOUNTING DEPARTMENT REPORTS (SAME HALVES)======\n");
 
         //calculate salary for Accounting department
         calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetAccounting, coefficient);
-        System.out.println(departmentBudgetAccounting.getMoney());
         calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetAccounting)
                 .forEach(System.out::println);
 
-        System.out.println("\n======COMMERCIAL DEPARTMENT REPORTS======\n");
+        System.out.println("\n======COMMERCIAL DEPARTMENT REPORTS (SAME HALVES)======\n");
 
         //calculate salary for Commercial department
         calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetCommercial, coefficient);
         calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetCommercial)
                 .forEach(System.out::println);
 
-        System.out.println("\n======MANAGERIAL DEPARTMENT REPORTS======\n");
+        System.out.println("\n======MANAGERIAL DEPARTMENT REPORTS (SAME HALVES)======\n");
 
         //calculate salary for Managerial department + set default budget for every department
         calculateSalary.setDefaultSalaryForDepartment(allInOneList, departmentBudgetManagerial, coefficient);
@@ -75,7 +73,7 @@ public class AppController {
 
         System.out.println("======ACCOUNTING DEPARTMENT REPORTS (PERCENT)======\n");
 
-        calculateSalary = new CalculatedSalaryWithPercentHalves();
+        calculateSalary = new CalculatedSalaryWithPercentHalves(); //percent halves
 
         //calculate salary for Accounting department
         calculateSalary.calculateSalaryByDepartment(allInOneList, departmentBudgetAccounting)
@@ -116,7 +114,7 @@ public class AppController {
 
         //try to change role manager with subordinate workers (catch exception)
         try{
-            OtherStaff otherStaff = (OtherStaff) managerService.changeRole(manager, RoleType.OTHER);
+            managerService.changeRole(manager, RoleType.OTHER);
         } catch (ManagerStillHasSubordinateException e){
             System.out.println("Exception: manager has subordinate workers");
         }

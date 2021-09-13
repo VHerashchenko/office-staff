@@ -2,7 +2,7 @@ INSERT INTO  vh_worker (name, birthday, start_date, salary, role, department)
 VALUES ('Yarick Zema', '29-06-1999', '12-03-2017', 3000000, 'MANAGER', 'ACCOUNTING');
 
 INSERT INTO vh_worker (name, birthday, start_date, salary, role, department, manager_id)
-VALUES ('Vadym Hera', '24-06-1999', '10-03-2020', 2000000, 'WORKER', 'ACCOUNTING',
+VALUES ('Vadym Hera', '24-09-1999', '10-03-2020', 2000000, 'WORKER', 'ACCOUNTING',
         (SELECT id FROM vh_worker WHERE name = 'Yarick Zema'));
 
 INSERT INTO vh_worker (name, birthday, start_date, salary, role, department, description, manager_id)
